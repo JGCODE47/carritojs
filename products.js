@@ -49,15 +49,16 @@ function btnAgregarCarrito(e){
         "id": parseInt(e.target.getAttribute("id_producto")),
         "name": e.target.getAttribute("name"),
         "img": e.target.getAttribute("img"),
-        "prece": parseInt(e.target.getAttribute("precio"))
+        "prece": parseInt(e.target.getAttribute("precio")),
+        "cantidad": 1
     }
 
     if(productos.length == 0){
         productos.push(producto)
-        console.log(productos)
+        localStorage.setItem("productos", JSON.stringify(productos))
     }else{
-       productos.filter(item=>parseInt(item.id) == parseInt(producto.id) ? false : productos.push(producto))
-       console.log(productos)
-        
+        const validar = productos.filter(item=>parseInt(item.id) == parseInt(producto.id) ? item : false)
+        validar == false ? productos.push(producto) : false
+        localStorage.setItem("productos", JSON.stringify(productos))   
     }
 }
